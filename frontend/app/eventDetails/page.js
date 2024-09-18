@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-//import styles from "./page.module.css";
+import styles from "./page.module.css";
 
 
 const eventsData = [
@@ -17,7 +17,7 @@ const EventDetails = () => {
   if (!event) return <div>Loading...</div>;
 
   return (
-    <div className="event-details">
+    <div className={styles.eventdetails}>
       <h1>{event.name}</h1>
       <p>Date: {event.date}</p>
       <p>{event.details}</p>
