@@ -8,12 +8,12 @@ const Event = ({ event }) => {
 
   const handleDetails = () => {
     // Navegamos a /details pasando el ID del evento como parámetro en la URL
-    router.push(`/details?id=${event.id}`);
+    router.push(`/details`);
   };
 
   const handleEnroll = (e) => {
     e.stopPropagation(); // Evita la propagación del evento para que no se active handleDetails
-    router.push("/Enroll");
+    router.push("/enroll");
   };
 
   return (

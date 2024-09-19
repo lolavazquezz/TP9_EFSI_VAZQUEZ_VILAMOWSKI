@@ -29,12 +29,13 @@ export default function RootLayout({ children }) {
               </li>
             </ul>
           </div>
+          <Link href="/profile">
           <div className={styles.profile}>
-            <Link href="/profile">
-              <img src='/profile.jpg' alt="profile" className={styles.profilePhoto} />
-            </Link>
-            <span className={styles.profileName}>User</span>
+              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK6XIfvGfED4TE4VgnFI6esbcVb2NCidLC6Zwu1K7iACEK4SfrS-n8E6R2jDBjS6J3qX4&usqp=CAU' alt="profile" className={styles.profilePhoto} />
+            <span className={styles.profileName}>Leila Shepard</span>
           </div>
+          </Link>
+
         </nav>
         {children}
       </body>

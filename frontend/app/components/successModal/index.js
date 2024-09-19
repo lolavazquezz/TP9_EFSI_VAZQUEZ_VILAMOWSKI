@@ -6,7 +6,7 @@ const SuccessModal = ({ onClose }) => {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h2 className={styles.title}>Sent successfully!</h2>
-        <p className={styles.message}>Your message has been sent successfully. We will get in touch with you soon.</p>
+        <p className={styles.message}>Your request has been sent successfully.</p>
         <button className={styles.button} onClick={onClose}>Close</button>
       </div>
     </div>

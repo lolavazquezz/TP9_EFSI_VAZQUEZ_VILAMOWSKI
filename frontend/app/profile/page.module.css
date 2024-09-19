@@ -1,0 +1,69 @@
+/* Aseguramos que el contenedor principal ocupe toda la altura de la pantalla */
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa todo el alto de la pantalla */
+  }
+  
+  .profileContainer {
+    flex: 1; /* Hace que el contenedor de perfil crezca y ocupe el espacio disponible */
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .profileHeader {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profileDetails {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .profileImageContainer {
+    margin-bottom: 20px;
+  }
+  
+  .profileImage {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .userInfo {
+    text-align: center;
+  }
+  
+  .userInfo h2 {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .userInfo p {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .profileActions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .editProfileButton {
+    padding: 10px 20px;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .editProfileButton:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Footer siempre en el fondo */
