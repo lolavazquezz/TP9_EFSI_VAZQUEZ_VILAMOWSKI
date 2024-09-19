@@ -12,7 +12,8 @@
 }
 
 .event:hover {
-    transform: scale(1.02); /* Efecto al pasar el ratón */
+    transform: scale(1.02);
+    cursor: pointer; /* Efecto al pasar el ratón */
 }
 
 .img {
@@ -53,4 +54,8 @@
 
 .enrollbutton:hover, .detailsbutton:hover {
     background-color: #005bb5; /* Color de fondo al pasar el ratón */
+}
+
+.enrollbutton{
+    margin-right: 10px;
 }
