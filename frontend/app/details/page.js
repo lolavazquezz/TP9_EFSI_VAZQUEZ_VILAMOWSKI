@@ -50,7 +50,6 @@ const EventDetails = () => {
           <div className={styles.details}>
             <p>Date: {shortDate}</p>
             <p>Location: {event.event_location}</p>
-            <p>Tag: {event.event_tag}</p>
             <p>Duration: {event.duration_in_minutes} minutes</p>
             <p>Category: {event.event_category}</p>
             <p>Max Assistance: {event.max_assistance} people</p>
