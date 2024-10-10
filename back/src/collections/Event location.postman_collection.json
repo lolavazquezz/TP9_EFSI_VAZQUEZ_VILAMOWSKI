@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "4235a76b-5acf-4801-8b34-1de69d2f5be5",
+		"name": "Event location",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllEventLocations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/event-location",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-location"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEventLocationById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/event-location/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-location",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getLocationFromEventLocationById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/event-location/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-location",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "fe105c80-8a48-4cb5-a6b8-4bbd195a0316",
+		"name": "Event category",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllCategories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/event-category",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCategoryById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/event-category/1",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createEventCategory",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 20,\r\n    \"event_category_name\": \"lolisashi\",\r\n    \"display_order\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/event-category",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "alterEventCategory",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/event-category?id=4&user='jsmith'&event_category_name='holuuuuuuuuu'",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-category"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4"
+						},
+						{
+							"key": "user",
+							"value": "'jsmith'"
+						},
+						{
+							"key": "event_category_name",
+							"value": "'holuuuuuuuuu'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteEventCategory",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/event-category/5",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"event-category",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
