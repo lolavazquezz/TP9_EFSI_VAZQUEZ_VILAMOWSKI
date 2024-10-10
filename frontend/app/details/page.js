@@ -1,42 +1,59 @@
 "use client"
-import React from 'react';
-import { useRouter } from 'next/navigation'; // Importa useRouter para la navegación
+import React, { useEffect, useState } from 'react'; 
+import { useRouter } from 'next/navigation'; 
 import styles from './page.module.css';
 import Footer from "../components/footer";
+import { format } from "date-fns";
+
 
 const EventDetails = () => {
   const router = useRouter();
+  const [event, setEvent] = useState(null); 
+  const [shortDate, setShortDate] = useState('');
+
+  useEffect(() => {
+    const storedEvent = sessionStorage.getItem("selectedEvent");
+    if (storedEvent) {
+      const parsedEvent = JSON.parse(storedEvent);
+      setEvent(parsedEvent);
+      setShortDate(format(new Date(parsedEvent.start_date), "dd/MM/yyyy")); // Formatea la fecha
+    } else {
+      router.push('/'); 
+    }
+  }, [router]);
 
   const handleEnroll = (e) => {
     router.push("/enroll");
   };
 
+  if (!event) return null;
+
   return (
       <main className={styles.mainContent}>
         <a href="/" className={styles.back}>← Events</a>
-        <h1 className={styles.eventTitle}>Travis Scott</h1>
+        <h1 className={styles.eventTitle}>{event.event_name}</h1>
 
         <div className={styles.eventImagePlaceholder}>
-          <img src='https://media.npr.org/assets/img/2021/11/16/gettyimages-1235223332_sq-e88ad790d447bd7dfcb0c1571047db26d39a8ee0.jpg'/>
+          <img src={event.image} alt={event.event_name} />
         </div>
 
         <div className={styles.detailsContent}>
           <div className={styles.priceEnroll}>
-            <span className={styles.price}>Price: $120</span>
+            <span className={styles.price}>Price: ${event.price}</span>
             <button onClick={handleEnroll} className={styles.enrollButton}>
-          Enroll
-        </button>
-                  </div>
+              Enroll
+            </button>
+          </div>
 
-          <p className={styles.description}>Description</p>
+          <p className={styles.description}>Detalles</p>
 
           <div className={styles.details}>
-            <p>Date: 12/12/2024</p>
-            <p>Location: River Plate Stadium</p>
-            <p>Tag: Rap Music</p>
-            <p>Duration: 120 minutes</p>
-            <p>Category: Concert</p>
-            <p>Max Assistance: 20,000 people</p>
+            <p>Date: {shortDate}</p>
+            <p>Location: {event.event_location}</p>
+            <p>Tag: {event.event_tag}</p>
+            <p>Duration: {event.duration_in_minutes} minutes</p>
+            <p>Category: {event.event_category}</p>
+            <p>Max Assistance: {event.max_assistance} people</p>
           </div>
         </div>
         <Footer />
