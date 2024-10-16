@@ -8,27 +8,11 @@ export default class EventRepository {
         try {
             await client.connect();
             const sql = `
-                SELECT DISTINCT ON (e.id) 
-                    e.id,
-                    e.event_name,
-                    e.description,
-                    ec.event_category_name as event_category,
-                    el.event_location_name as event_location,
-                    u.id as id_creator_user,
-                    u.first_name as creator_name,
-                    e.start_date,
-                    e.duration_in_minutes,
-                    e.price,
-                    e.enabled_for_enrollment,
-                    e.max_assistance
-                FROM 
-                    public.events e
-                INNER JOIN 
-                    public.event_categories ec ON e.id_event_category = ec.id
-                INNER JOIN 
-                    public.event_locations el ON e.id_event_location = el.id_location
-                INNER JOIN 
-                    public.users u ON e.id_creator_user = u.id
+            SELECT e.*, ec.event_category_name as category_name, el.event_location_name as event_location, u.id as id_creator
+FROM public.events e
+INNER JOIN public.event_categories as ec on e.id_event_category = ec.id
+INNER JOIN public.event_locations as el on e.id_event_location = el.id
+INNER JOIN public.users as u on e.id_creator_user = u.id
             `;
             const result = await client.query(sql);
             await client.end();

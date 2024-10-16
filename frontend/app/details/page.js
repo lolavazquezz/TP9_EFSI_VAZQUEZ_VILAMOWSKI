@@ -51,7 +51,7 @@ const EventDetails = () => {
             <p>Date: {shortDate}</p>
             <p>Location: {event.event_location}</p>
             <p>Duration: {event.duration_in_minutes} minutes</p>
-            <p>Category: {event.event_category}</p>
+            <p>Category: {event.category_name}</p>
             <p>Max Assistance: {event.max_assistance} people</p>
           </div>
         </div>
