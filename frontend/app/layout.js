@@ -1,16 +1,30 @@
+"use client"
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import styles from "./layout.module.css";
 import logo from './logo.png';
 import Image from "next/image";
+import useAuth from "./components/useAuth.js";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Events"
-};
+// export const metadata = {
+//   title: "Events"
+// };
 
 export default function RootLayout({ children }) {
+  const { user } = useAuth();
+  const router = useRouter();
+  const [id, setId] = useState(null);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser && storedUser.id) {
+      setId(storedUser.id);
+    }
+  }, []);
   return (
     <html lang="en">
       <body className={styles.body}>
@@ -31,8 +45,7 @@ export default function RootLayout({ children }) {
           </div>
           <Link href="/profile">
           <div className={styles.profile}>
-              <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRK6XIfvGfED4TE4VgnFI6esbcVb2NCidLC6Zwu1K7iACEK4SfrS-n8E6R2jDBjS6J3qX4&usqp=CAU' alt="profile" className={styles.profilePhoto} />
-            <span className={styles.profileName}>Leila Shepard</span>
+            <span className={styles.profileName}>{user.first_name}</span>
           </div>
           </Link>
 
