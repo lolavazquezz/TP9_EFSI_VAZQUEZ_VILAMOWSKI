@@ -7,60 +7,90 @@ const { Client } = pkg;
 const JWT_SECRET = 'topsecret'; 
 
 export default class UserRepository {
-
-    logUser = async (pentity) => {
+    getAllUsuarios = async () => {
+        let answer = null;
         const client = new Client(config);
         try {
             await client.connect();
-            const sql = `SELECT id, password FROM public.users WHERE username = '${pentity.username}'`;
+            const sql = `
+                SELECT * 
+                FROM public.users
+            `;
             const result = await client.query(sql);
             await client.end();
-
-            const user = result.rows[0];
-            const passwordMatch = await bcrypt.compare(pentity.password, user.password);
-
-            if (!passwordMatch) {
-                return { success: false, message: 'Usuario o clave inválida.', token: '' };
-            }
-
-            const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '1h' });
-            console.log(token);
-
-            return { success: true, message: '', token };
+            answer = result.rows;
         } catch (error) {
-            console.error('Error en loginUser:', error);
-            return { success: false, message: 'Error en el servidor.', token: '' };
+            console.log(error);
         }
+        return answer;
     }
-
-    createUser = async (pentity) => {
+    async createUser(pentity) {
+        let answer = null;
         const client = new Client(config);
         try {
             await client.connect();
 
-            if (pentity.first_name.length < 3 || pentity.last_name.length < 3) {
-                return { success: false, message: 'Los campos first_name o last_name deben tener al menos tres (3) letras.', token: '' };
+            const { username, first_name, last_name, password } = pentity; 
+            if (!username || !first_name || !last_name || !password ) {
+                answer = "faltanCampos";
+                await client.end();
+                return answer;
             }
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(pentity.username)) {
-                return { success: false, message: 'El email es inválido.', token: '' };
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            const sql = `
+                INSERT INTO users (username, first_name, last_name, password)
+                VALUES ($1, $2, $3, $4)
+                RETURNING *;
+            `;
+            const values = [username, first_name, last_name, hashedPassword];
+            const result = await client.query(sql, values);
+
+            if (result.rows.length > 0) {
+                answer = result.rows;
+            } else {
+                answer = "error";
             }
-
-            if (pentity.password.length < 3) {
-                return { success: false, message: 'El campo password debe tener al menos tres (3) letras.', token: '' };
-            }
-
-            const hashedPassword = await bcrypt.hash(pentity.password, 10);
-
-            const sql = `INSERT INTO public.users (first_name, last_name, username, password) VALUES ($1, $2, $3, $4)`;
-            await client.query(sql, [pentity.first_name, pentity.last_name, pentity.username, hashedPassword]);
             await client.end();
-
-            return { success: true, message: 'Usuario creado satisfactoriamente.', token: '' };
         } catch (error) {
-            console.error('Error en registerUser:', error);
-            return { success: false, message: 'Error en el servidor.', token: '' };
+            console.log('Error en createUser:', error);
+            answer = "error";
         }
+        return answer;
+    }
+
+    async authenticateUser(username, password) {
+        let user = null;
+        const client = new Client(config);
+        try {
+            await client.connect();
+            const sql = 'SELECT * FROM users WHERE username = $1';
+            const result = await client.query(sql, [username]);
+            user = result.rows[0];
+            if (user && await bcrypt.compare(password, user.password)) {
+                await client.end();
+                return user;
+            }
+            await client.end();
+            return null;
+        } catch (error) {
+            console.error(error);
+        }
+        return null;
+    }
+    getUserById = async (userId) => {
+        let user = null;
+        const client = new Client(config);
+        try {
+            await client.connect();
+            const sql = 'SELECT * FROM users WHERE id = $1';
+            const result = await client.query(sql, [userId]);
+            user = result.rows[0];
+            await client.end();
+        } catch (error) {
+            console.error('Error en getUserById:', error);
+        }
+        return user;
     }
 }

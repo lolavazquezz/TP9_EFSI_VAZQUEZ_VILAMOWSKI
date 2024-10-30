@@ -1,58 +1,132 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import styles from "./page.module.css";
+import styles from './page.module.css'
 import Footer from "../components/footer";
+import { FaEnvelope, FaUser, FaLock } from "react-icons/fa";
 
 export default function Register() {
-  const [formData, setFormData] = useState({
-    full_name: "",
-    last_name: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [error, setError] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [isChecking, setIsChecking] = useState(false); 
   const router = useRouter();
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setError("");
-    if (formData.password !== formData.confirmPassword) {
-      return setError("Las contraseñas no coinciden");
+  
+    if (password !== confirmPassword) {
+      setError("Las contraseñas no coinciden.");
+      return;
     }
+  
+    setIsChecking(true);
+  
     try {
-      const response = await axios.post("http://localhost:3000/api/user/register", formData);
-      router.push("/login");
+      const response = await axios.get("http://localhost:3000/api/user/usuarios");
+  
+      const existingUser = response.data.some(
+        user => user.username === username
+      );
+  
+      if (existingUser) {
+        setError("El correo o el nombre de usuario ya están en uso.");
+        setIsChecking(false); 
+        return;
+      }
+      const registerResponse = await axios.post("http://localhost:3000/api/user/register", {
+        username, first_name, last_name, password
+      });
+      if (registerResponse.status === 201 && Array.isArray(registerResponse.data.answer) && registerResponse.data.answer.length > 0) {
+        const user = registerResponse.data.answer[0];
+        localStorage.setItem("user", JSON.stringify(user));
+        router.push(`/login`); 
+      } else {
+        setError("Error al registrar usuario");
+      }
+
+  
     } catch (error) {
-      setError("Error en el registro: " + error.response?.data?.message || "Error del servidor");
+      console.error("Error durante el registro:", error);
+      setError("Error al registrar usuario");
+    } finally {
+      setIsChecking(false);
     }
   };
 
   return (
-    <div>
-      <div className={styles.page}>
-        <main className={styles.main}>
-          <h1 className={styles.title}>Create account</h1>
-          <form className={styles.form} onSubmit={handleRegister}>
-            <input onChange={handleChange} name="full_name" type="text" placeholder="Full Name" value={formData.full_name} className={styles.input} />
-            <input onChange={handleChange} name="last_name" type="text" placeholder="Last Name" value={formData.last_name} className={styles.input} />
-            <input onChange={handleChange} name="username" type="text" placeholder="Username" value={formData.username} className={styles.input} />
-            <input onChange={handleChange} name="password" type="password" placeholder="Password" value={formData.password} className={styles.input} />
-            <input onChange={handleChange} name="confirmPassword" type="password" placeholder="Confirm Password" value={formData.confirmPassword} className={styles.input} />
-            <div className={styles.buttonContainer}>
-              <a href="/login" className={styles.button}>Sign in</a>
-              <button type="submit" className={styles.button}>Next</button>
-            </div>
-          </form>
-          {error && <p className={styles.error}>{error}</p>}
-        </main>
+    <div className={styles.container}>
+      <div className={styles.titleContainer}>
+        <h1 className={styles.title}>Registro</h1>
       </div>
+      <form onSubmit={handleRegister} className={styles.form}>
+        <div className={styles.inputContainer}>
+          <FaEnvelope className={styles.icon} />
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <FaUser className={styles.icon} />
+          <input
+            type="text"
+            placeholder="First name"
+            value={first_name}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <FaUser className={styles.icon} />
+          <input
+            type="text"
+            placeholder="Last name"
+            value={last_name}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <FaLock className={styles.icon} />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <FaLock className={styles.icon} />
+          <input
+            type="password"
+            placeholder="Confirm password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </div>
+        <button type="submit" className={styles.button} disabled={isChecking}>
+          {isChecking ? "Verificando..." : "Registrar"}
+        </button>
+        {error && <p className={styles.error}>{error}</p>}
+        <div className={styles.footer}>
+          <p>¿Ya tienes una cuenta? <a href="/login">Log in</a></p>
+        </div>
+      </form>
       <Footer />
     </div>
   );
