@@ -1,7 +1,7 @@
-"use client";
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import useAuth from '../useAuth.js'; // Ajusta la importación según tu estructura
+import useAuth from '../useAuth.js';
+import styles from './enrollModal.module.css';
 
 const EnrollModal = ({ isOpen, onClose, eventId }) => {
     const { user } = useAuth();
@@ -13,10 +13,19 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
     const [message, setMessage] = useState('');
 
     useEffect(() => {
-        if (!eventId) {
-            setMessage('Esperando el ID del evento...');
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';  // Evita scroll en el fondo
+            document.body.classList.add('modal-open'); // Añade clase para deshabilitar fondo
+        } else {
+            document.body.style.overflow = 'auto';
+            document.body.classList.remove('modal-open');
         }
-    }, [eventId]);
+
+        return () => {
+            document.body.style.overflow = 'auto';
+            document.body.classList.remove('modal-open');
+        };
+    }, [isOpen]);
 
     const enrollUser = async () => {
         if (!eventId || !user) {
@@ -27,11 +36,11 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
         const enrollmentData = {
             id_event: eventId,
             id_user: user.id,
-            description,
+            description: attended ? description : null,
             registration_date_time: registrationDateTime,
             attended,
-            observations,
-            rating
+            observations: attended ? observations : null,
+            rating: attended ? rating : null,
         };
 
         try {
@@ -47,30 +56,31 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="modal">
-            <div className="modal-content">
-                <span className="close" onClick={onClose}>&times;</span>
-                <h1>Inscripción a Eventos</h1>
+        <div className={styles.overlay}>
+            <div className={styles.modalContent}>
+                <span className={styles.close} onClick={onClose}>&times;</span>
+                <div className={styles.h1}>Inscripción a Eventos</div>
                 <div>
-                    <label htmlFor="description">Descripción:</label>
+                    <div className={styles.label}>Descripción:</div>
                     <input
                         type="text"
-                        id="description"
+                        className={styles.input}
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        disabled={!attended}
                     />
                 </div>
                 <div>
-                    <label htmlFor="registration-date-time">Fecha y hora de inscripción:</label>
+                    <div className={styles.label}>Fecha y hora de inscripción:</div>
                     <input
                         type="datetime-local"
-                        id="registration-date-time"
+                        className={styles.input}
                         value={registrationDateTime.substring(0, 16)}
                         onChange={(e) => setRegistrationDateTime(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label>
+                    <label className={styles.label}>
                         <input
                             type="checkbox"
                             checked={attended}
@@ -80,26 +90,28 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
                     </label>
                 </div>
                 <div>
-                    <label htmlFor="observations">Observaciones:</label>
+                    <div className={styles.label}>Observaciones:</div>
                     <textarea
-                        id="observations"
+                        className={styles.textarea}
                         value={observations}
                         onChange={(e) => setObservations(e.target.value)}
+                        disabled={!attended}
                     />
                 </div>
                 <div>
-                    <label htmlFor="rating">Calificación:</label>
+                    <div className={styles.label}>Calificación:</div>
                     <input
                         type="number"
-                        id="rating"
+                        className={styles.numberInput}
                         min="1"
                         max="5"
                         value={rating || ''}
                         onChange={(e) => setRating(e.target.value)}
+                        disabled={!attended}
                     />
                 </div>
-                <button onClick={enrollUser}>Inscribirse</button>
-                {message && <p>{message}</p>}
+                <button className={styles.button} onClick={enrollUser}>Inscribirse</button>
+                {message && <p className={styles.message}>{message}</p>}
             </div>
         </div>
     );
