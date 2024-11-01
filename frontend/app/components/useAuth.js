@@ -12,6 +12,20 @@ function useAuth() {
     const storedUser = localStorage.getItem("user");
 
     useEffect(() => {
+        const handleStorageChange = () => {
+            const updatedUser = JSON.parse(localStorage.getItem("user"));
+            setUser(updatedUser);
+            setLoading(false);
+        };
+    
+        window.addEventListener("storage", handleStorageChange);
+        
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
+    }, []);
+    
+    useEffect(() => {
         if (!storedUser || !token) {
             localStorage.removeItem("token"); 
             localStorage.removeItem("user"); 
