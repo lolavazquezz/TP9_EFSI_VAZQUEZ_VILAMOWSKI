@@ -16,7 +16,7 @@ const EventDetails = () => {
     if (storedEvent) {
       const parsedEvent = JSON.parse(storedEvent);
       setEvent(parsedEvent);
-      setShortDate(format(new Date(parsedEvent.start_date), "dd/MM/yyyy")); // Formatea la fecha
+      setShortDate(format(new Date(parsedEvent.start_date), "dd/MM/yyyy"));
     } else {
       router.push('/'); 
     }
@@ -32,11 +32,6 @@ const EventDetails = () => {
       <main className={styles.mainContent}>
         <a href="/" className={styles.back}>← Events</a>
         <h1 className={styles.eventTitle}>{event.event_name}</h1>
-
-        <div className={styles.eventImagePlaceholder}>
-          <img src={event.image} alt={event.event_name} />
-        </div>
-
         <div className={styles.detailsContent}>
           <div className={styles.priceEnroll}>
             <span className={styles.price}>Price: ${event.price}</span>

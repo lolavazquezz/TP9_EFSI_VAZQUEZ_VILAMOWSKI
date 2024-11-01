@@ -1,59 +1,58 @@
 .event {
-    display: flex; /* Mantiene el uso de flexbox */
-    align-items: flex-start; /* Alinea los elementos al inicio (arriba) */
-    border: 1px solid #ccc; /* Añade un borde */
-    border-radius: 8px; /* Bordes redondeados */
-    padding: 16px; /* Espaciado interno */
-    margin: 10px; /* Espaciado externo */
-    background-color: #f9f9f9; /* Color de fondo */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ccc;
+    border-radius: 8px; 
+    padding: 16px; 
+    margin: 10px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     transition: transform 0.2s; 
-    align-items: center;/* Efecto de transición */
+    align-items: center;
 }
 
 .event:hover {
     transform: scale(1.02);
-    cursor: pointer; /* Efecto al pasar el ratón */
+    cursor: pointer; 
 }
 
 .img {
     width: 100px;
     height: 100px;
     object-fit: cover;
-    border-radius: 8px; /* Bordes redondeados en la imagen */
-    margin-right: 16px; /* Espaciado a la derecha de la imagen */
+    border-radius: 8px; 
+    margin-right: 16px;
 }
 
 .content {
-    display: flex; /* Mantiene los botones en una fila */
+    display: flex; 
     margin-left: auto;
-     /* Empuja el contenido hacia la derecha */
 }
 
 .h3 {
-    font-size: 1.2rem; /* Tamaño de fuente */
-    margin: 0; /* Elimina margen predeterminado */
+    font-size: 1.2rem;
+    margin: 0;
 }
 
 .p {
-    font-size: 0.9rem; /* Tamaño de fuente */
-    color: #555; /* Color del texto */
-    margin: 5px 0; /* Espaciado vertical */
+    font-size: 0.9rem; 
+    color: #555;
+    margin: 5px 0; 
 }
 
 .enrollbutton, .detailsbutton {
-    background-color: #0070f3; /* Color de fondo */
-    color: white; /* Color del texto */
-    border: none; /* Sin borde */
-    border-radius: 4px; /* Bordes redondeados */
-    padding: 10px 15px; /* Espaciado interno */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    margin-top: 8px; /* Espaciado superior entre botones */
-    transition: background-color 0.2s; /* Efecto de transición */
+    background-color: #0070f3; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    margin-top: 8px;
+    transition: background-color 0.2s;
 }
 
 .enrollbutton:hover, .detailsbutton:hover {
-    background-color: #005bb5; /* Color de fondo al pasar el ratón */
+    background-color: #005bb5; 
 }
 
 .enrollbutton{

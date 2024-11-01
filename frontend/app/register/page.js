@@ -44,7 +44,7 @@ export default function Register() {
 if (registerResponse.status === 201 && Array.isArray(registerResponse.data.answer) && registerResponse.data.answer.length > 0) {
   const user = registerResponse.data.answer[0];
   localStorage.setItem("user", JSON.stringify(user));
-  router.push('/login'); // Asegúrate de que la ruta aquí sea '/login'
+  router.push('/login');
 } else {
   setError("Error al registrar usuario");
 }

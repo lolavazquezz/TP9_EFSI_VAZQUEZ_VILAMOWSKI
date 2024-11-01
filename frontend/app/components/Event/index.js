@@ -20,7 +20,6 @@ const Event = ({ event }) => {
 
   return (
     <div className={styles.event} onClick={handleDetails}>
-      <img src={event.image} alt={event.event_name} className={styles.img} />
       <div>
         <h3 className={styles.h3}>{event.event_name}</h3>
         <p className={styles.p}>{shortDate}</p>
