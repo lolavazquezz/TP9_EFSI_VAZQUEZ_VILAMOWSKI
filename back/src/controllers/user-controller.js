@@ -1,6 +1,6 @@
 import {Router} from "express";
 import Service from '../services/user-service.js';
-import authenticateToken from '../middlewares/auth-middleware.js'; // Asegúrate de importar el middleware
+import authenticateToken from '../middlewares/auth-middleware.js';
 import jwt from 'jsonwebtoken';
 const JWT_SECRET = 'KvduPPiIG7NJ2Quhk5jGMy6z2YizmG';
 const router = Router()

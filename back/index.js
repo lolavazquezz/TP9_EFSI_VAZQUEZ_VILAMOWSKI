@@ -7,12 +7,10 @@ import locationRouter from "./src/controllers/location-controller.js";
 import provinceRouter from "./src/controllers/province-controller.js"; 
 import userRouter from "./src/controllers/user-controller.js"; 
 const app = express();
-const port = 3000; // El puerto 3000 (http://localhost:3000)
-// Agrego los Middlewares
+const port = 3000;
 app.use(express.json());
 app.use(cors()); 
 
-//dividir por controllers
 
 app.use("/api/event", eventRouter);
 app.use("/api/event-category", eventCategoryRouter);
