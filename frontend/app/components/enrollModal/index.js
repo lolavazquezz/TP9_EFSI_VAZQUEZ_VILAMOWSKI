@@ -14,8 +14,8 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
 
     useEffect(() => {
         if (isOpen) {
-            document.body.style.overflow = 'hidden';  // Evita scroll en el fondo
-            document.body.classList.add('modal-open'); // Añade clase para deshabilitar fondo
+            document.body.style.overflow = 'hidden';  
+            document.body.classList.add('modal-open');
         } else {
             document.body.style.overflow = 'auto';
             document.body.classList.remove('modal-open');
@@ -59,7 +59,17 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
         <div className={styles.overlay}>
             <div className={styles.modalContent}>
                 <span className={styles.close} onClick={onClose}>&times;</span>
-                <div className={styles.h1}>Inscripción a Eventos</div>
+                <div className={styles.h1}>Inscripción a eventos</div>
+                <div>
+                    <label className={styles.label}>
+                        <input
+                            type="checkbox"
+                            checked={attended}
+                            onChange={(e) => setAttended(e.target.checked)}
+                        />
+                        Asistió
+                    </label>
+                </div>
                 <div>
                     <div className={styles.label}>Descripción:</div>
                     <input
@@ -78,16 +88,6 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
                         value={registrationDateTime.substring(0, 16)}
                         onChange={(e) => setRegistrationDateTime(e.target.value)}
                     />
-                </div>
-                <div>
-                    <label className={styles.label}>
-                        <input
-                            type="checkbox"
-                            checked={attended}
-                            onChange={(e) => setAttended(e.target.checked)}
-                        />
-                        Asistió
-                    </label>
                 </div>
                 <div>
                     <div className={styles.label}>Observaciones:</div>

@@ -9,7 +9,6 @@ const Event = ({ event }) => {
   const router = useRouter();
   const shortDate = format(new Date(event.start_date), "dd/MM/yyyy");
 
-  // Estado para el modal y el ID del evento
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
   
@@ -18,13 +17,11 @@ const Event = ({ event }) => {
     router.push(`/details`);
   };
 
-  // Función para manejar la inscripción
   const onEnroll = (eventId) => {
     setSelectedEventId(eventId);
     setIsModalOpen(true);
   };
 
-  // Función para cerrar el modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedEventId(null);

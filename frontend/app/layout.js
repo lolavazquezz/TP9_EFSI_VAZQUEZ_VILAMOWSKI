@@ -6,24 +6,24 @@ import logo from './logo.png';
 import Image from "next/image";
 import useAuth from "./components/useAuth.js";
 import { useRouter } from 'next/navigation';
-import { useEffect} from "react";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }) {
   const { user, loading } = useAuth();
   const router = useRouter();
-  
+
   useEffect(() => {
-      if (!loading && !user) {
-          router.push('/login');
-      }
+    if (!loading && !user) {
+      router.push('/login');
+    }
   }, [user, loading]);
 
   return (
-      <html lang="en">
-          <body className={styles.body}>
-              <nav className={styles.nav}>
+    <html lang="en">
+      <body className={styles.body}>
+        <nav className={styles.nav}>
           <div className={styles.header}>
             <Link href="/">
               <Image src={logo} alt="logo" className={styles.logo} />
@@ -39,13 +39,13 @@ export default function RootLayout({ children }) {
             </ul>
           </div>
           <Link href="/profile">
-                        <div className={styles.profile}>
-                            <span className={styles.profileName}>{user?.first_name || "Invitado"}</span>
-                        </div>
-                    </Link>
-                </nav>
-                {loading ? <p>Loading...</p> : children}
-            </body>
-        </html>
-    );
+            <div className={styles.profile}>
+              <span className={styles.profileName}>{"Mi perfil"}</span>
+            </div>
+          </Link>
+        </nav>
+        {loading ? <p>Loading...</p> : children}
+      </body>
+    </html>
+  );
 }

@@ -39,15 +39,15 @@ export default function Register() {
         return;
       }
       const registerResponse = await axios.post("http://localhost:3000/api/user/register", {
-  username, first_name, last_name, password
-});
-if (registerResponse.status === 201 && Array.isArray(registerResponse.data.answer) && registerResponse.data.answer.length > 0) {
-  const user = registerResponse.data.answer[0];
-  localStorage.setItem("user", JSON.stringify(user));
-  router.push('/login');
-} else {
-  setError("Error al registrar usuario");
-}
+        username, first_name, last_name, password
+      });
+      if (registerResponse.status === 201 && Array.isArray(registerResponse.data.answer) && registerResponse.data.answer.length > 0) {
+        const user = registerResponse.data.answer[0];
+        localStorage.setItem("user", JSON.stringify(user));
+        router.push('/login');
+      } else {
+        setError("Error al registrar usuario");
+      }
 
 
   

@@ -4,13 +4,24 @@ import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import Footer from "../components/footer";
 import { format } from "date-fns";
-
+import EnrollModal from '../components/enrollModal';
 
 const EventDetails = () => {
   const router = useRouter();
   const [event, setEvent] = useState(null); 
   const [shortDate, setShortDate] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState(null);
 
+  const onEnroll = (eventId) => {
+    setSelectedEventId(eventId);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedEventId(null);
+  };
   useEffect(() => {
     const storedEvent = sessionStorage.getItem("selectedEvent");
     if (storedEvent) {
@@ -22,10 +33,6 @@ const EventDetails = () => {
     }
   }, [router]);
 
-  const handleEnroll = (e) => {
-    router.push("/enroll");
-  };
-
   if (!event) return null;
 
   return (
@@ -35,9 +42,9 @@ const EventDetails = () => {
         <div className={styles.detailsContent}>
           <div className={styles.priceEnroll}>
             <span className={styles.price}>Price: ${event.price}</span>
-            <button onClick={handleEnroll} className={styles.enrollButton}>
-              Enroll
-            </button>
+            <button onClick={() => onEnroll(event.id)} className={styles.enrollbutton}>
+          Enroll
+        </button>
           </div>
 
           <p className={styles.description}>Detalles</p>
@@ -50,6 +57,8 @@ const EventDetails = () => {
             <p>Max Assistance: {event.max_assistance} people</p>
           </div>
         </div>
+      <EnrollModal isOpen={isModalOpen} onClose={closeModal} eventId={selectedEventId} />
+
         <Footer />
       </main>
   );

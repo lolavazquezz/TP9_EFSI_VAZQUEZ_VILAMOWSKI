@@ -51,20 +51,25 @@
     font-weight: bold;
     color: #555;
   }
-  
-  .enrollButton {
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .enrollButton:hover {
-    background-color: #218838;
-  }
+  .enrollbutton, .detailsbutton {
+    background-color: #0070f3; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    padding: 10px 15px; 
+    cursor: pointer; 
+    margin-top: 8px;
+    transition: background-color 0.2s;
+}
+
+.enrollbutton:hover, .detailsbutton:hover {
+    background-color: #005bb5; 
+}
+
+.enrollbutton{
+    margin-right: 10px;
+}
+
   
   .description {
     font-size: 18px;

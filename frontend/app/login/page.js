@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import styles from './page.module.css'
 import Footer from "../components/footer";
 import { FaEnvelope, FaLock } from "react-icons/fa";  
+import Link from "next/link";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -64,7 +65,7 @@ export default function Login() {
         {error && <p className={styles.error}>{error}</p>}
       </form>
       <div className={styles.footer}>
-        <p>¿No tenes una cuenta? <a href="/register">Registrate</a></p>
+        <p>¿No tenes una cuenta? <Link href='/register'>Registrate</Link></p>
       </div>
       <Footer />
     </div>
