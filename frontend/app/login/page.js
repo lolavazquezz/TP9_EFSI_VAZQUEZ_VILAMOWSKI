@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from './page.module.css'
 import Footer from "../components/footer";
-import { FaEnvelope, FaLock } from "react-icons/fa";  
+import { FaUser, FaLock } from "react-icons/fa";  
 import Link from "next/link";
 
 export default function Login() {
@@ -36,36 +36,38 @@ export default function Login() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Iniciar Sesión</h1>
-      <form onSubmit={handleLogin} className={styles.form}>
-        <div className={styles.inputContainer}>
-          <FaEnvelope className={styles.icon} />
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className={styles.input}
-          />
+    <div className={styles.page}>
+      <div className={styles.main}>
+        <h1 className={styles.title}>Iniciar Sesión</h1>
+        <form onSubmit={handleLogin} className={styles.form}>
+          <div className={styles.inputContainer}>
+            <FaUser className={styles.icon} />
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <FaLock className={styles.icon} />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+          <button type="submit" className={styles.button}>Iniciar Sesión</button>
+          {error && <p className={styles.error}>{error}</p>}
+        </form>
+        <div className={styles.footer}>
+          <p>¿No tienes una cuenta? <Link href='/register'>Regístrate</Link></p>
         </div>
-        <div className={styles.inputContainer}>
-          <FaLock className={styles.icon} />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-        <button type="submit" className={styles.button}>Iniciar Sesión</button>
-        {error && <p className={styles.error}>{error}</p>}
-      </form>
-      <div className={styles.footer}>
-        <p>¿No tenes una cuenta? <Link href='/register'>Registrate</Link></p>
       </div>
       <Footer />
     </div>

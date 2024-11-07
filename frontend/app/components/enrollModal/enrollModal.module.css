@@ -20,7 +20,7 @@
     width: 100%;
     text-align: center;
     position: relative;
-    cursor: default; /* Evita el movimiento del modal al arrastrar */
+    cursor: default;
 }
 
 
@@ -79,13 +79,11 @@
     color: red;
 }
 
-/* Desactiva la interacción y selección de elementos de fondo */
 .modal-open *:not(.modalContent) {
-    pointer-events: none; /* No permite clics ni hovers */
-    user-select: none; /* Evita la selección de texto */
+    pointer-events: none; 
+    user-select: none;
 }
 
-/* Asegura que el modal sea interactivo */
 .modal-open .overlay,
 .modal-open .modalContent {
     pointer-events: all;

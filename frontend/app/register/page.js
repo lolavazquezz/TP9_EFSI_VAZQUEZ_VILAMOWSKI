@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from './page.module.css'
 import Footer from "../components/footer";
-import { FaEnvelope, FaUser, FaLock } from "react-icons/fa";
+import { FaUser, FaLock } from "react-icons/fa";
 
 export default function Register() {
   const [first_name, setFirstName] = useState("");
@@ -48,9 +48,6 @@ export default function Register() {
       } else {
         setError("Error al registrar usuario");
       }
-
-
-  
     } catch (error) {
       console.error("Error durante el registro:", error);
       setError("Error al registrar usuario");
@@ -59,76 +56,75 @@ export default function Register() {
     }
   };
 
-  
   return (
-    <div className={styles.container}>
-      <div className={styles.titleContainer}>
+    <div className={styles.page}>
+      <div className={styles.main}>
         <h1 className={styles.title}>Registro</h1>
+        <form onSubmit={handleRegister} className={styles.form}>
+          <div className={styles.inputContainer}>
+            <FaUser className={styles.icon} />
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <FaUser className={styles.icon} />
+            <input
+              type="text"
+              placeholder="First name"
+              value={first_name}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <FaUser className={styles.icon} />
+            <input
+              type="text"
+              placeholder="Last name"
+              value={last_name}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <FaLock className={styles.icon} />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <FaLock className={styles.icon} />
+            <input
+              type="password"
+              placeholder="Confirm password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
+          <button type="submit" className={styles.button} disabled={isChecking}>
+            {isChecking ? "Verificando..." : "Registrar"}
+          </button>
+          {error && <p className={styles.error}>{error}</p>}
+          <div className={styles.footer}>
+            <p>¿Ya tienes una cuenta? <a href="/login">Log in</a></p>
+          </div>
+        </form>
       </div>
-      <form onSubmit={handleRegister} className={styles.form}>
-        <div className={styles.inputContainer}>
-          <FaEnvelope className={styles.icon} />
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <FaUser className={styles.icon} />
-          <input
-            type="text"
-            placeholder="First name"
-            value={first_name}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <FaUser className={styles.icon} />
-          <input
-            type="text"
-            placeholder="Last name"
-            value={last_name}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <FaLock className={styles.icon} />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <FaLock className={styles.icon} />
-          <input
-            type="password"
-            placeholder="Confirm password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </div>
-        <button type="submit" className={styles.button} disabled={isChecking}>
-          {isChecking ? "Verificando..." : "Registrar"}
-        </button>
-        {error && <p className={styles.error}>{error}</p>}
-        <div className={styles.footer}>
-          <p>¿Ya tienes una cuenta? <a href="/login">Log in</a></p>
-        </div>
-      </form>
       <Footer />
     </div>
   );

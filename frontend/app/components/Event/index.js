@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react"; // Importa useState
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import styles from "./event.module.css";
