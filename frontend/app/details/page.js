@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from 'react'; 
 import { useRouter } from 'next/navigation'; 
 import styles from './page.module.css';
@@ -22,6 +22,7 @@ const EventDetails = () => {
     setIsModalOpen(false);
     setSelectedEventId(null);
   };
+
   useEffect(() => {
     const storedEvent = sessionStorage.getItem("selectedEvent");
     if (storedEvent) {
@@ -36,31 +37,33 @@ const EventDetails = () => {
   if (!event) return null;
 
   return (
-      <main className={styles.mainContent}>
-        <a href="/" className={styles.back}>← Events</a>
-        <h1 className={styles.eventTitle}>{event.event_name}</h1>
-        <div className={styles.detailsContent}>
-          <div className={styles.priceEnroll}>
-            <span className={styles.price}>Price: ${event.price}</span>
-            <button onClick={() => onEnroll(event.id)} className={styles.enrollbutton}>
-          Enroll
-        </button>
-          </div>
+    <main className={styles.mainContent}>
+      <a href="/" className={styles.back}>← Events</a>
+      <h1 className={styles.eventTitle}>{event.event_name}</h1>
 
-          <p className={styles.description}>Detalles</p>
-
-          <div className={styles.details}>
-            <p>Date: {shortDate}</p>
-            <p>Location: {event.event_location}</p>
-            <p>Duration: {event.duration_in_minutes} minutes</p>
-            <p>Category: {event.category_name}</p>
-            <p>Max Assistance: {event.max_assistance} people</p>
-          </div>
+      <div className={styles.detailsContent}>
+        <div className={styles.priceEnroll}>
+          <span className={styles.price}>${event.price}</span>
+          <button onClick={() => onEnroll(event.id)} className={styles.enrollbutton}>
+            Enroll
+          </button>
         </div>
+
+        <p className={styles.description}>Detalles del Evento</p>
+
+        <div className={styles.details}>
+          <p><span className={styles.label}>Date:</span> {shortDate}</p>
+          <p><span className={styles.label}>Location:</span> {event.event_location}</p>
+          <p><span className={styles.label}>Duration:</span> {event.duration_in_minutes} minutes</p>
+          <p><span className={styles.label}>Category:</span> {event.category_name}</p>
+          <p><span className={styles.label}>Max Assistance:</span> {event.max_assistance} people</p>
+        </div>
+      </div>
+
       <EnrollModal isOpen={isModalOpen} onClose={closeModal} eventId={selectedEventId} />
 
-        <Footer />
-      </main>
+      <Footer />
+    </main>
   );
 };
 

@@ -46,17 +46,21 @@ function Profile() {
   return (
     <main className={styles.perfilPage}>
       <div className={styles.profileHeader}>
+        <h2>Perfil de Usuario</h2>
       </div>
 
       <div className={styles.options}>
         <div className={styles.option}>
-          <span>{user.username}</span>
+          <span className={styles.label}>Nombre de usuario:</span>
+          <span className={styles.value}>{user.username}</span>
         </div>
         <div className={styles.option}>
-          <span>{user.first_name}</span>
+          <span className={styles.label}>Primer nombre:</span>
+          <span className={styles.value}>{user.first_name}</span>
         </div>
         <div className={styles.option}>
-          <span>{user.last_name}</span>
+          <span className={styles.label}>Apellido:</span>
+          <span className={styles.value}>{user.last_name}</span>
         </div>
       </div>
 
