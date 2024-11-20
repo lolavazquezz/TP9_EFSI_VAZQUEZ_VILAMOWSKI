@@ -35,10 +35,10 @@ const Event = ({ event }) => {
       </div>
       <div className={styles.content}>
         <button onClick={() => onEnroll(event.id)} className={styles.enrollbutton}>
-          Enroll
+          Inscribirse
         </button>
         <button onClick={handleDetails} className={styles.detailsbutton}>
-          Details
+          Detalles
         </button>
       </div>
       <EnrollModal isOpen={isModalOpen} onClose={closeModal} eventId={selectedEventId} />

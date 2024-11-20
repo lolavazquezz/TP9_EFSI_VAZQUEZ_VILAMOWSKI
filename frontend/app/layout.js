@@ -7,6 +7,7 @@ import Image from "next/image";
 import useAuth from "./components/useAuth.js";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
+import Footer from "./components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +29,13 @@ export default function RootLayout({ children }) {
             <Link href="/">
               <Image src={logo} alt="logo" className={styles.logo} />
             </Link>
-            <Link href="/" className={styles.title}>Events</Link>
+            <Link href="/" className={styles.title}>Eventos</Link>
             <ul className={styles.menu}>
               <li className={styles.menuItem}>
                 <Link href="/" className={styles.menuLink}>Home</Link>
               </li>
               <li className={styles.menuItem}>
-                <Link href="/contact" className={styles.menuLink}>Contact</Link>
+                <Link href="/contact" className={styles.menuLink}>Contactanos</Link>
               </li>
             </ul>
           </div>
@@ -44,8 +45,11 @@ export default function RootLayout({ children }) {
             </div>
           </Link>
         </nav>
-        {loading ? <p>Loading...</p> : children}
+        {loading ? <p>Cargando...</p> : children}
       </body>
+      <footer>
+          <Footer />
+        </footer>
     </html>
   );
 }

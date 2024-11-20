@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import styles from './page.module.css'
-import Footer from "../components/footer";
 import { FaUser, FaLock } from "react-icons/fa";  
 import Link from "next/link";
 
@@ -38,13 +37,13 @@ export default function Login() {
   return (
     <div className={styles.page}>
       <div className={styles.main}>
-        <h1 className={styles.title}>Iniciar Sesión</h1>
+        <h1 className={styles.title}>Iniciar sesión</h1>
         <form onSubmit={handleLogin} className={styles.form}>
           <div className={styles.inputContainer}>
             <FaUser className={styles.icon} />
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Nombre de usuario"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -55,21 +54,20 @@ export default function Login() {
             <FaLock className={styles.icon} />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               className={styles.input}
             />
           </div>
-          <button type="submit" className={styles.button}>Iniciar Sesión</button>
+          <button type="submit" className={styles.button}>Iniciar sesión</button>
           {error && <p className={styles.error}>{error}</p>}
         </form>
         <div className={styles.footer}>
-          <p>¿No tienes una cuenta? <Link href='/register'>Regístrate</Link></p>
+          <p>¿No tenes una cuenta? <Link href='/register'>Registrate</Link></p>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -65,7 +65,7 @@ export default function Register() {
             <FaUser className={styles.icon} />
             <input
               type="text"
-              placeholder="Username"
+              placeholder="Nombre de usuario"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -76,7 +76,7 @@ export default function Register() {
             <FaUser className={styles.icon} />
             <input
               type="text"
-              placeholder="First name"
+              placeholder="Nombre"
               value={first_name}
               onChange={(e) => setFirstName(e.target.value)}
               required
@@ -87,7 +87,7 @@ export default function Register() {
             <FaUser className={styles.icon} />
             <input
               type="text"
-              placeholder="Last name"
+              placeholder="Apellido"
               value={last_name}
               onChange={(e) => setLastName(e.target.value)}
               required
@@ -98,7 +98,7 @@ export default function Register() {
             <FaLock className={styles.icon} />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -109,7 +109,7 @@ export default function Register() {
             <FaLock className={styles.icon} />
             <input
               type="password"
-              placeholder="Confirm password"
+              placeholder="Confirmar contraseña"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -121,11 +121,10 @@ export default function Register() {
           </button>
           {error && <p className={styles.error}>{error}</p>}
           <div className={styles.footer}>
-            <p>¿Ya tienes una cuenta? <a href="/login">Log in</a></p>
+            <p>¿Ya tienes una cuenta? <a href="/login">Iniciá sesión</a></p>
           </div>
         </form>
       </div>
-      <Footer />
     </div>
   );
 }

@@ -24,7 +24,6 @@ const Home = () => {
   return (
     <div>
       <Events events={events} />
-      <Footer />
     </div>
   );
 };

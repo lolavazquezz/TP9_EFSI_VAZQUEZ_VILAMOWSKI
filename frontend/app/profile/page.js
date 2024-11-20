@@ -24,7 +24,7 @@ function Profile() {
     router.push("/login");
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div>Cargando...</div>;
 
   if (showAuthOptions) {
     return (
@@ -32,10 +32,10 @@ function Profile() {
         <div className={styles.buttonsContainer}>
           <div className={styles.buttonsTop}>
             <Link href="/login">
-              <button className={styles.button}>Log in</button>
+              <button className={styles.button}>Iniciar sesión</button>
             </Link>
             <Link href="/register">
-              <button className={styles.button}>Register</button>
+              <button className={styles.button}>Registrarse</button>
             </Link>
           </div>
         </div>
@@ -46,7 +46,7 @@ function Profile() {
   return (
     <main className={styles.perfilPage}>
       <div className={styles.profileHeader}>
-        <h2>Perfil de Usuario</h2>
+        <h2>Perfil de usuario</h2>
       </div>
 
       <div className={styles.options}>
@@ -55,7 +55,7 @@ function Profile() {
           <span className={styles.value}>{user.username}</span>
         </div>
         <div className={styles.option}>
-          <span className={styles.label}>Primer nombre:</span>
+          <span className={styles.label}>Nombre:</span>
           <span className={styles.value}>{user.first_name}</span>
         </div>
         <div className={styles.option}>
@@ -65,7 +65,7 @@ function Profile() {
       </div>
 
       <button onClick={handleLogout} className={styles.logoutButton}>
-        Log out
+        Cerrar sesión
       </button>
     </main>
   );

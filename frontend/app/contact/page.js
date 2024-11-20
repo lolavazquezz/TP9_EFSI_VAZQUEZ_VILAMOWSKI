@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import styles from "./page.module.css";
-import Footer from "../components/footer";
 import SuccessModal from "../components/successModal";
 
 export default function Contact() {
@@ -35,17 +34,17 @@ export default function Contact() {
   };
 
   return (
-    <div>
+    <main>
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1 className={styles.title}>Contact us</h1>
+        <h1 className={styles.title}>Contactanos</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Name"
+            placeholder="Nombre"
             className={styles.input}
             required
           />
@@ -62,17 +61,16 @@ export default function Contact() {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Message"
+            placeholder="Mensaje"
             className={styles.textarea}
             rows="5"
             required
           ></textarea>
-          <button type="submit" className={styles.button}>Send</button>
+          <button type="submit" className={styles.button}>Enviar</button>
         </form>
       </main>
       {isModalOpen && <SuccessModal onClose={handleCloseModal} />}
       </div>
-      <Footer />
-    </div>
+    </main>
   );
 }
