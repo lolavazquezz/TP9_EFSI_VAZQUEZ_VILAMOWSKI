@@ -110,7 +110,7 @@ const EnrollModal = ({ isOpen, onClose, eventId }) => {
                         disabled={!attended}
                     />
                 </div>
-                <button className={styles.button} onClick={enrollUser}>Inscribirse</button>
+                <button className={styles.button} onClick={enrollUser}>OK</button>
                 {message && <p className={styles.message}>{message}</p>}
             </div>
         </div>

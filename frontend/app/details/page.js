@@ -44,7 +44,7 @@ const EventDetails = () => {
         <div className={styles.priceEnroll}>
           <span className={styles.price}>${event.price}</span>
           <button onClick={() => onEnroll(event.id)} className={styles.enrollbutton}>
-            Hecho
+            Inscribirse
           </button>
         </div>
 
