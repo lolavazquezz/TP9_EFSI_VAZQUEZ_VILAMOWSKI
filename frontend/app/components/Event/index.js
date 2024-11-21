@@ -35,7 +35,7 @@ const Event = ({ event }) => {
       </div>
       <div className={styles.content}>
         <button onClick={() => onEnroll(event.id)} className={styles.enrollbutton}>
-          Inscribirse
+          Inscribirse/Calificar
         </button>
         <button onClick={handleDetails} className={styles.detailsbutton}>
           Detalles
